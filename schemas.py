@@ -13,6 +13,23 @@ class PeeweeGetterDict(GetterDict):
         return res
 
 
+class ActorBase(BaseModel):
+    name: str
+    surname: str
+
+
+class ActorCreate(ActorBase):
+    pass
+
+
+class Actor(ActorBase):
+    id: int
+
+    class Config:
+        orm_mode = True
+        getter_dict = PeeweeGetterDict
+
+
 class MovieBase(BaseModel):
     title: str
     year: int
@@ -26,24 +43,15 @@ class MovieCreate(MovieBase):
 
 class Movie(MovieBase):
     id: int
-    # actors: List[Actor] = []
 
     class Config:
         orm_mode = True
         getter_dict = PeeweeGetterDict
 
 
-class ActorBase(BaseModel):
-    name: str
-    surname: str
-
-
-class ActorCreate(ActorBase):
-    pass
-
-
-class Actor(ActorBase):
+class MovieDetailed(MovieBase):
     id: int
+    actors: List[Actor] = []
 
     class Config:
         orm_mode = True

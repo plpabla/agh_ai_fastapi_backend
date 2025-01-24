@@ -17,7 +17,7 @@ async def get_movies():
     return list(models.Movie.select())
 
 
-@app.get("/movies/{movie_id}", response_model=schemas.Movie)
+@app.get("/movies/{movie_id}", response_model=schemas.MovieDetailed)
 def get_movie(movie_id: int):
     try:
         movie = models.Movie.get_by_id(movie_id)
