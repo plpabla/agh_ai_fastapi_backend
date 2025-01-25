@@ -1,6 +1,6 @@
 import Movie from "./Movie";
 
-export default function MoviesList({ movies, setMovies }) {
+export default function MoviesList({ movies, setMovies, deleteMovie }) {
   return (
     <ul>
       {movies.map((movie, index) => (
@@ -8,7 +8,10 @@ export default function MoviesList({ movies, setMovies }) {
           <Movie
             {...movie}
             deleteMovie={() => {
-              setMovies(movies.filter((_, i) => i !== index));
+              console.log(">>> deleting movie", movie.id);
+              deleteMovie(movie.id).then(() =>
+                setMovies(movies.filter((_, i) => i !== index))
+              );
             }}
           />
         </li>
