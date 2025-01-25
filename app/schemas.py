@@ -38,7 +38,7 @@ class MovieBase(BaseModel):
 
 
 class MovieCreate(MovieBase):
-    pass
+    actors: List[int] = []
 
 
 class Movie(MovieBase):

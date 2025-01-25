@@ -31,8 +31,8 @@ function App() {
       <hr />
       <h1>Add movie</h1>
       <MovieForm
-        addMovie={(title, year, director, description) => {
-          addMovie(title, year, director, description).then((res) =>
+        addMovie={(title, year, director, description, actorsList) => {
+          addMovie(title, year, director, description, actorsList).then((res) =>
             setMovies([...movies, { ...res }])
           );
         }}

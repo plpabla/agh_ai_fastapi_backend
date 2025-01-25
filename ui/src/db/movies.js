@@ -1,10 +1,17 @@
-export async function addMovie(title, year, director, description) {
+export async function addMovie(title, year, director, description, actorsList) {
+  console.log(">> Actors list", actorsList);
   const response = await fetch("/movies", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
     },
-    body: JSON.stringify({ title, year, director, description }),
+    body: JSON.stringify({
+      title,
+      year,
+      director,
+      description,
+      actors: actorsList,
+    }),
   });
 
   if (!response.ok) {

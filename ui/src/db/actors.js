@@ -13,3 +13,8 @@ export async function getActors() {
   const response = await fetch("/actors");
   return response.json();
 }
+
+export async function getActorsForMovie(movieId) {
+  const response = await fetch(`/movies/${movieId}/actors`);
+  return response.json();
+}

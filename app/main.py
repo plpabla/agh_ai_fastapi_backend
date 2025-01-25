@@ -53,10 +53,14 @@ def get_movie(movie_id: int):
         raise HTTPException(status_code=404, detail="Movie not found")
 
 
-@app.post("/movies/", response_model=schemas.Movie)
+@app.post("/movies/", response_model=schemas.MovieDetailed)
 async def create_movie(movie: schemas.MovieCreate):
-    movie = models.Movie.create(**movie.dict())
-    return movie
+    movie_data = movie.dict(exclude={"actors"})
+    m = models.Movie.create(**movie_data)
+    m.save()
+    m.actors = [*movie.actors]
+    m.save()
+    return m
 
 
 @app.delete("/movies/{movie_id}")

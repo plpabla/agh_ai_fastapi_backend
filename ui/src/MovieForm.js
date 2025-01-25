@@ -16,7 +16,10 @@ export default function MovieForm({ addMovie }) {
           e.target.title.value,
           e.target.year.value,
           e.target.director.value,
-          e.target.description.value
+          e.target.description.value,
+          Array.from(e.target.actors.selectedOptions).map((option) =>
+            Number(option.value)
+          )
         );
         e.target.reset();
       }}
