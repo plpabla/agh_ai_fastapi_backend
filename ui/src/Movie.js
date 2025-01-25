@@ -1,6 +1,6 @@
 import Accordion from "react-bootstrap/Accordion";
 
-export default function Movie({ movie }) {
+export default function Movie({ movie, onDelete }) {
   return (
     <>
       <Accordion.Header>
@@ -9,7 +9,7 @@ export default function Movie({ movie }) {
       <Accordion.Body>
         <p>Director: {movie.director}</p>
         <p>{movie.description}</p>
-        <button className="button button-clear" onClick={movie.deleteMovie}>
+        <button className="button" onClick={onDelete}>
           Delete
         </button>
       </Accordion.Body>
