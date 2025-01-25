@@ -2,10 +2,13 @@ import "milligram";
 import { useState, useEffect } from "react";
 import MoviesList from "./MoviesList";
 import MovieForm from "./MovieForm";
+import ActorForm from "./ActorForm";
 import { addMovie, deleteMovie } from "./db/movies";
+import { addActor } from "./db/actors";
 
 function App() {
   const [movies, setMovies] = useState([]);
+  const [actors, setActors] = useState([]);
 
   useEffect(() => {
     fetch("/movies")
@@ -31,6 +34,16 @@ function App() {
         addMovie={(title, year, director, description) => {
           addMovie(title, year, director, description).then((res) =>
             setMovies([...movies, { ...res }])
+          );
+        }}
+      />
+
+      <hr />
+      <h1>Add actor</h1>
+      <ActorForm
+        addActor={(name, surname) => {
+          addActor(name, surname).then((res) =>
+            setActors([...actors, { ...res }])
           );
         }}
       />

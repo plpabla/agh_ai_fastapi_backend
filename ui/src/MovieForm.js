@@ -26,8 +26,9 @@ export default function MovieForm({ addMovie }) {
       </label>
       <label>
         Description:
-        <textarea name="description" required />
+        <textarea name="description" />
       </label>
+
       <button type="submit">Add Movie</button>
     </form>
   );
