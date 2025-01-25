@@ -1,4 +1,13 @@
+import { useState, useEffect } from "react";
+import { getActors } from "./db/actors";
+
 export default function MovieForm({ addMovie }) {
+  const [actors, setActors] = useState([]);
+
+  useEffect(() => {
+    getActors().then((data) => setActors(data));
+  }, []);
+
   return (
     <form
       onSubmit={(e) => {
@@ -27,6 +36,16 @@ export default function MovieForm({ addMovie }) {
       <label>
         Description:
         <textarea name="description" />
+      </label>
+      <label>
+        Actors:
+        <select name="actors" multiple>
+          {actors.map((actor) => (
+            <option key={actor.id} value={actor.id}>
+              {actor.name} {actor.surname}
+            </option>
+          ))}
+        </select>
       </label>
 
       <button type="submit">Add Movie</button>

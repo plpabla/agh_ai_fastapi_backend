@@ -42,9 +42,9 @@ function App() {
       <h1>Add actor</h1>
       <ActorForm
         addActor={(name, surname) => {
-          addActor(name, surname).then((res) =>
-            setActors([...actors, { ...res }])
-          );
+          addActor(name, surname)
+            .then((res) => setActors([...actors, { ...res }]))
+            .then(window.location.reload());
         }}
       />
     </div>
