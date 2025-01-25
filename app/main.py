@@ -5,8 +5,9 @@ from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 
-from . import models
-from . import schemas
+import models
+import schemas
+from fastapi.middleware.cors import CORSMiddleware
 
 # http://127.0.0.1:8000/docs
 
@@ -16,6 +17,14 @@ app.mount(
     "/static",
     StaticFiles(directory="../ui/build/static", check_dir=True),
     name="static",
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 
