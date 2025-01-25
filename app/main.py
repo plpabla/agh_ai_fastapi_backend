@@ -2,11 +2,29 @@
 # $ fastapi dev main.py
 
 from fastapi import FastAPI, HTTPException
-import models
-import schemas
+from fastapi.responses import FileResponse
+from fastapi.staticfiles import StaticFiles
+
+from . import models
+from . import schemas
+
+# http://127.0.0.1:8000/docs
+
 
 app = FastAPI()
-# http://127.0.0.1:8000/docs
+app.mount(
+    "/static",
+    StaticFiles(directory="../ui/build/static", check_dir=True),
+    name="static",
+)
+
+
+######################################
+# Index
+######################################
+@app.get("/")
+def serve_react_app():
+    return FileResponse("../ui/build/index.html")
 
 
 ######################################
