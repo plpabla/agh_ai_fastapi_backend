@@ -1,3 +1,7 @@
+# Info
+
+qdrant branch with... yes, qdrant
+
 # Running backend
 
     $ cd app
