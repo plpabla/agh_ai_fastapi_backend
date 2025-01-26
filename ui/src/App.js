@@ -5,6 +5,7 @@ import MovieForm from "./MovieForm";
 import ActorForm from "./ActorForm";
 import { addMovie, deleteMovie } from "./db/movies";
 import { addActor } from "./db/actors";
+import Search from "./Search";
 
 function App() {
   const [movies, setMovies] = useState([]);
@@ -18,6 +19,7 @@ function App() {
 
   return (
     <div className="container">
+      <Search />
       <h1>My favourite movies to watch!</h1>
       {movies.length ? (
         <MoviesList

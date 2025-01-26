@@ -4,10 +4,11 @@
 from fastapi import FastAPI, HTTPException
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
+from fastapi.middleware.cors import CORSMiddleware
 
 import models
 import schemas
-from fastapi.middleware.cors import CORSMiddleware
+from qdrant import qdrant_init, add_vector, search_vector
 
 # http://127.0.0.1:8000/docs
 
@@ -26,6 +27,8 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+qdrant_init()
 
 
 ######################################
@@ -60,6 +63,7 @@ async def create_movie(movie: schemas.MovieCreate):
     m.save()
     m.actors = [*movie.actors]
     m.save()
+    add_vector(m.id, m.description)
     return m
 
 
@@ -158,3 +162,12 @@ async def remove_movie_actor(movie_id: int, actor_id: int):
         raise HTTPException(status_code=404, detail="Movie not found")
     except models.Actor.DoesNotExist:
         raise HTTPException(status_code=404, detail="Actor not found")
+
+
+######################################
+# Search
+######################################
+@app.get("/search/{query}")
+async def search(query: str):
+    id = search_vector(query)
+    return {"id": id}

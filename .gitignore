@@ -1,3 +1,5 @@
 venv/
 movies.db
 __pycache__/
+sandbox/
+qdrant_data/
